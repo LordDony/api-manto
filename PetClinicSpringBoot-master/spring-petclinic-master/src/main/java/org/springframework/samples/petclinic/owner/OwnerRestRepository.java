@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.appointment.UserHelping;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -22,6 +23,6 @@ public interface OwnerRestRepository extends Repository<OwnerRest, Integer>{
     @Transactional(readOnly = true)
     ArrayList<OwnerRest> All();
     
-    @Query("SELECT user from UserHelping user where user.email = :email AND user.password = :password")
-    ArrayList<OwnerRest> getByEmailUser(@Param("email") String email, @Param("password") String password);
+    @Query("SELECT user from UserHelping user where user.email = :email")
+    ArrayList<UserHelping> getByEmailUser(@Param("email") String email);
 }
