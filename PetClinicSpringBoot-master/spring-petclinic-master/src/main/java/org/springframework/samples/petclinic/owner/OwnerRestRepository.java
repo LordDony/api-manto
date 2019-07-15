@@ -8,6 +8,7 @@ package org.springframework.samples.petclinic.owner;
 import java.util.ArrayList;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -20,4 +21,7 @@ public interface OwnerRestRepository extends Repository<OwnerRest, Integer>{
     @Query("SELECT owner FROM OwnerRest owner ")
     @Transactional(readOnly = true)
     ArrayList<OwnerRest> All();
+    
+    @Query("SELECT user from UserHelping user where user.email = :email AND user.password = :password")
+    ArrayList<OwnerRest> getByEmailUser(@Param("email") String email, @Param("password") String password);
 }
