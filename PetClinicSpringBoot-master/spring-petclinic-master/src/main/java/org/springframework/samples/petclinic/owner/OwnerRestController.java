@@ -35,12 +35,12 @@ public class OwnerRestController {
         this.owners =  owners;
     }
     
+    
     @RequestMapping(method = RequestMethod.POST, path = "/api/owners/login")
-    public Integer getOwners(@RequestBody UserHelping userHelping) {
+    public Map getOwners(@RequestBody UserHelping userHelping) {
         String email = userHelping.getEmail();
         String password = userHelping.getPassword();
-        System.out.println(userHelping.getPassword());
-        ArrayList<UserHelping> userData = this.owners.getByEmailUser("admin@admin.com");
+        ArrayList<UserHelping> userData = this.owners.getByEmailUser(email);
         String pass = null;
         Integer id = null;
         for(UserHelping user : userData){
@@ -49,20 +49,19 @@ public class OwnerRestController {
         }
         String [] strPass = pass.split("}");
         BCryptPasswordEncoder b = new BCryptPasswordEncoder();
-        //System.out.println(strPass[1]);
-        //System.out.println(pass);
-        //System.out.println(id);
-        //System.out.println(b.matches(password,  strPass[1]));
-        //System.out.println(strPass[1]);
-        //System.out.println(pass);
-        //System.out.println(password);
-        //System.out.println(strPass[1]);
+        
+        
+        HashMap<String, Integer> map = new HashMap<>();
+        
+       
         if(b.matches(password,  strPass[1]) == false){
-            System.out.println("no estas logeado");
-            return 0;
-        }else return id;
-        /*ArrayList<OwnerRest> owners = this.owners.All();
-        return owners;*/
+            map.put("response", 0);
+            return map;
+        }else{
+            map.put("response", 1);
+            return map;
+        }
+       
     }
     /*@RequestMapping(method = RequestMethod.GET, path = "/api/owners/{owner}")
     public Appointment getCita(@PathVariable("citaID") int citaID) {
