@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -34,24 +35,32 @@ public class OwnerRestController {
         this.owners =  owners;
     }
     
-    @RequestMapping(method = RequestMethod.GET, path = "/api/owners/login")
-    public ArrayList<UserHelping> getOwners() {
-        String password = "admi";
-        String email = "admin@admin.com";
-        
+    @RequestMapping(method = RequestMethod.POST, path = "/api/owners/login")
+    public Integer getOwners(@RequestBody UserHelping userHelping) {
+        String email = userHelping.getEmail();
+        String password = userHelping.getPassword();
+        System.out.println(userHelping.getPassword());
         ArrayList<UserHelping> userData = this.owners.getByEmailUser("admin@admin.com");
         String pass = null;
+        Integer id = null;
         for(UserHelping user : userData){
             pass = user.getPassword();
+            id   = user.getId();
         }
         String [] strPass = pass.split("}");
         BCryptPasswordEncoder b = new BCryptPasswordEncoder();
-        System.out.println(strPass[1]);
-        System.out.println(pass);
+        //System.out.println(strPass[1]);
+        //System.out.println(pass);
+        //System.out.println(id);
+        //System.out.println(b.matches(password,  strPass[1]));
+        //System.out.println(strPass[1]);
+        //System.out.println(pass);
+        //System.out.println(password);
+        //System.out.println(strPass[1]);
         if(b.matches(password,  strPass[1]) == false){
             System.out.println("no estas logeado");
-            return userData;
-        }else return userData;
+            return 0;
+        }else return id;
         /*ArrayList<OwnerRest> owners = this.owners.All();
         return owners;*/
     }
