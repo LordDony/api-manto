@@ -47,6 +47,18 @@ public class UserHelping  extends Person{
     @Column(name = "city")
     @NotEmpty
     private String city;
+    
+    @Column(name="first_name")
+    @NotEmpty
+    private String firstName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public String getEmail() {
         return email;

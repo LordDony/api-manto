@@ -39,5 +39,9 @@ inner join specialties on appointment.id_specialtie=specialties.id;
     nativeQuery = true)
     int updateUserSetStatusForNameNative(String confirmacion, Integer id);
     
+    @Query("SELECT appointment from Appointment appointment WHERER appointment.owner_id = :id")
+    @Transactional
+    Collection<Appointment> getCitasByOwner(@Param("id") Integer id);
+    
     void delete(Appointment appoinment);
 }

@@ -6,6 +6,8 @@
 package org.springframework.samples.petclinic.citasrest;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.samples.petclinic.appointment.Appointment;
 import org.springframework.samples.petclinic.appointment.AppointmentRepository;
 import org.springframework.samples.petclinic.appointment.SpecialtieRepository;
@@ -51,8 +53,11 @@ public class RestCitasController {
         return cita;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
-    public int getCitasByOwner(@PathVariable("ownerID") int ownerID){
-        return 0;
+    public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
+       Collection<Appointment> citas = this.appointmentRepository.getCitasByOwner(ownerID);
+        HashMap<String, Collection<Appointment>> map = new HashMap<>();
+        map.put("citas",citas);
+        return map;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/confirmadas")
     public Collection<Appointment> getCitasConfirmadas(){

@@ -37,31 +37,30 @@ public class OwnerRestController {
     
     
     @RequestMapping(method = RequestMethod.POST, path = "/api/owners/login")
-    public Map getOwners(@RequestBody UserHelping userHelping) {
+    public Map login(@RequestBody UserHelping userHelping) {
         String email = userHelping.getEmail();
         String password = userHelping.getPassword();
         ArrayList<UserHelping> userData = this.owners.getByEmailUser(email);
         String pass = null;
         Integer id = null;
+        String name = null;
         for(UserHelping user : userData){
             pass = user.getPassword();
             id   = user.getId();
+            name = user.getFirstName();
         }
         String [] strPass = pass.split("}");
         BCryptPasswordEncoder b = new BCryptPasswordEncoder();
-        
-        
-        HashMap<String, Integer> map = new HashMap<>();
-        
-       
+        HashMap<String, String> map = new HashMap<>();
         if(b.matches(password,  strPass[1]) == false){
-            map.put("response", 0);
+            map.put("response", "0");
             return map;
         }else{
-            map.put("response", 1);
+            map.put("response","1");
+            map.put("name",name);
+            map.put("userId",""+id);
             return map;
         }
-       
     }
     /*@RequestMapping(method = RequestMethod.GET, path = "/api/owners/{owner}")
     public Appointment getCita(@PathVariable("citaID") int citaID) {
