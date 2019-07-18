@@ -54,7 +54,7 @@ public class RestCitasController {
     }
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
     public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
-       Collection<Appointment> citas = this.appointmentRepository.getCitasByOwner(ownerID);
+        Collection<Appointment> citas = this.appointmentRepository.getCitasByOwner(ownerID);
         HashMap<String, Collection<Appointment>> map = new HashMap<>();
         map.put("citas",citas);
         return map;
