@@ -54,8 +54,11 @@ public class RestCitasController {
     }
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
     public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
-        Collection<Appointment> citas = this.appointmentRepository.getCitasByOwner(ownerID);
-        HashMap<String, Collection<Appointment>> map = new HashMap<>();
+        Collection<DataCita> citas = this.appointmentRepository.getCitasByOwner(ownerID);
+        HashMap<String, Collection<DataCita>> map = new HashMap<>();
+        for(DataCita cita : citas){
+            System.out.println(cita.getBirth_date());
+        }
         map.put("citas",citas);
         return map;
     }

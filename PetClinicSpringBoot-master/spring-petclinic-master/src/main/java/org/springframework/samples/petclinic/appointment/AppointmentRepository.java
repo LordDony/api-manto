@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.citasrest.DataCita;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface AppointmentRepository extends Repository<Appointment, Integer> {
@@ -39,9 +40,9 @@ inner join specialties on appointment.id_specialtie=specialties.id;
     nativeQuery = true)
     int updateUserSetStatusForNameNative(String confirmacion, Integer id);
     
-    @Query("SELECT appointment from Appointment appointment WHERE appointment.owner_id = :id")
+    @Query("SELECT appointment.id,appointment.fecha,appointment.hora,appointment.confirmacion, mascotas.name, mascotas.birth_date from Appointment appointment inner join Mascotas mascotas on appointment.mascota = mascotas.id  WHERE appointment.owner_id = :id")
     @Transactional
-    Collection<Appointment> getCitasByOwner(@Param("id") Integer id);
+    Collection<DataCita> getCitasByOwner(@Param("id") Integer id);
     
     void delete(Appointment appoinment);
 }
