@@ -75,10 +75,13 @@ public class RestCitasController {
         //return StudentRegistration.getInstance().deleteStudent(regdNum);
     }
 
-    /*@RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
+    @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
     public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
-        
-    }*/
+        Appointment citas = (Appointment) this.appointmentRepository.getAppointments(ownerID);
+        HashMap<String, Appointment> map = new HashMap<>();
+        map.put("response",citas);
+        return map;
+    }
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/confirmadas")
     public Collection<Appointment> getCitasConfirmadas(){
         Collection<Appointment> citasConfirmadas = this.appointmentRepository.getAppointmentsByConfirmation(1);
