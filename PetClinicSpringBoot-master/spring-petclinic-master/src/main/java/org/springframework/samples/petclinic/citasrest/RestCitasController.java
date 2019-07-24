@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.samples.petclinic.appointment.AppointmentRepository;
+import org.springframework.samples.petclinic.citas.Especialidades;
+import org.springframework.samples.petclinic.citas.EspecialidadesRepository;
 import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.OwnerRepository;
 import org.springframework.samples.petclinic.user.User;
@@ -36,10 +38,12 @@ public class RestCitasController {
     
     private final AppointmentRepository appointmentRepository;
     private final OwnerRepository owners;
+    private final EspecialidadesRepository especialedadesRepo;
 
-    public RestCitasController(AppointmentRepository appointmentRepository, OwnerRepository owners) {
+    public RestCitasController(AppointmentRepository appointmentRepository, OwnerRepository owners, EspecialidadesRepository esp) {
         this.appointmentRepository = appointmentRepository;
         this.owners = owners;
+        this.especialedadesRepo = esp;
     }
     
     //obtener todas las citas
@@ -52,6 +56,14 @@ public class RestCitasController {
     public Appointment getCita(@PathVariable("citaID") int citaID) {
         Appointment cita = this.appointmentRepository.findById(citaID);
         return cita;
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, path = "/api/especialidades")
+    public Map getEsp(){
+        Collection<Especialidades> especialidades = this.especialedadesRepo.getEspecialidades();
+        HashMap<String, Collection<Especialidades>> map = new HashMap<>();
+        map.put("citas",especialidades);
+        return map;
     }
     
     @RequestMapping(method = RequestMethod.POST, value="/api/citas/new")
