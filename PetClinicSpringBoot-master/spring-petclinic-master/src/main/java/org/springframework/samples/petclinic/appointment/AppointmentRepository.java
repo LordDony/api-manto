@@ -35,7 +35,7 @@ inner join specialties on appointment.id_specialtie=specialties.id;
     Appointment findById(@Param("id") Integer id);
     
     @Query("SELECT appointment From Appointment appointment  WHERE appointment.owner_id =:id")
-    Collection<Appointment> getAppointmentsByOwner(@Param("id") int id);
+    Collection<Appointment> getAppointmentsByOwner(@Param("id") String id);
     
     @Modifying
     @Transactional

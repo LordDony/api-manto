@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package org.springframework.samples.petclinic.citasrest;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -67,7 +68,7 @@ public class RestCitasController {
     }
     
     @RequestMapping(method = RequestMethod.POST, value="/api/citas/new")
-    public String CreateCitas(@RequestBody Appointment cita){
+    public String CreateCitas(@RequestBody Appointment cita) throws ParseException{
         
         System.out.println("Owner_id: "+cita.getOwner_id());
         System.out.println("Mascota"+cita.getMascota());
@@ -89,7 +90,7 @@ public class RestCitasController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
-    public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
+    public Map getCitasByOwner(@PathVariable("ownerID") String ownerID){
         Collection<Appointment> citas = this.appointmentRepository.getAppointmentsByOwner(ownerID);
         HashMap<String, Collection<Appointment>> map = new HashMap<>();
         map.put("citas",citas);
