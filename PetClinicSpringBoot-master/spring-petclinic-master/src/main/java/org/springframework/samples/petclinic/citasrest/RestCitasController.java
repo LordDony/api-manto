@@ -62,7 +62,7 @@ public class RestCitasController {
     public Map getEsp(){
         Collection<Especialidades> especialidades = this.especialedadesRepo.getEspecialidades();
         HashMap<String, Collection<Especialidades>> map = new HashMap<>();
-        map.put("citas",especialidades);
+        map.put("especialidades",especialidades);
         return map;
     }
     
@@ -80,10 +80,12 @@ public class RestCitasController {
     }
     
     @RequestMapping(method = RequestMethod.DELETE, value="/api/citas/{cita_id}")
-    public String deleteStudentRecord(@PathVariable("cita_id") Integer cita_id) {
+    public Map deleteCita(@PathVariable("cita_id") Integer cita_id) {
         Appointment cita = this.appointmentRepository.findById(cita_id);
         this.appointmentRepository.delete(cita);
-        return "deleted";
+        HashMap<String, String> map = new HashMap<>();
+        map.put("deleted", String.valueOf(cita_id));
+        return map;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
@@ -109,12 +111,5 @@ public class RestCitasController {
         Collection<Appointment> citasByEspecialidad  = this.appointmentRepository.getAppointments(especialidad);
         return citasByEspecialidad;
     }
-    
-    
-    
-    
-    
-    
-    
     
 }
