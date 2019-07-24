@@ -36,4 +36,12 @@ public class MascotasRestController {
         return map;
     }
     
+    @RequestMapping(method = RequestMethod.GET, path = "/api/mascotas/byid/{id}")
+    public Map getMascotasById(@PathVariable("id") int id){
+        Collection<Mascotas> mascotasCollection = this.mascotas.getOnlyMascotas(id);
+        Map<String, Collection<Mascotas>> map = new HashMap<>();
+        map.put("mascotas", mascotasCollection);
+        return map;
+    }
+    
 }
