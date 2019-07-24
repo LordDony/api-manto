@@ -27,4 +27,7 @@ public interface MascotasRepository extends Repository<Mascotas, Integer>{
     @Query("SELECT mascotas FROM Mascotas mascotas WHERE mascotas.id <=:id")
     @Transactional(readOnly = true)
     Collection<Mascotas> getOnlyMascotas(@Param("id") Integer id);
+    
+    @Query("SELECT mascotas FROM Mascotas mascotas where owner_id =:owner_id")
+    Collection<Mascotas> getMascotaByOwner(@Param("owner_id") Integer owner_id);
 }
