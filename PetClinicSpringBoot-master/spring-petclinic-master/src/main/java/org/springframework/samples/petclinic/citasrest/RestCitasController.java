@@ -77,9 +77,12 @@ public class RestCitasController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
     public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
-        Appointment citas = (Appointment) this.appointmentRepository.getAppointments(ownerID);
-        HashMap<String, Appointment> map = new HashMap<>();
-        map.put("response",citas);
+        Collection<Appointment> citas = this.appointmentRepository.getAppointmentsByOwner(ownerID);
+        HashMap<String, Collection<Appointment>> map = new HashMap<>();
+        for(Appointment cita : citas){
+            System.out.println(cita.getHora());
+        }
+        map.put("citas",citas);
         return map;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/confirmadas")

@@ -34,6 +34,9 @@ inner join specialties on appointment.id_specialtie=specialties.id;
     @Transactional(readOnly = true)
     Appointment findById(@Param("id") Integer id);
     
+    @Query("SELECT appointment From Appointment appointment  WHERE appointment.owner_id =:id")
+    Collection<Appointment> getAppointmentsByOwner(@Param("id") int id);
+    
     @Modifying
     @Transactional
     @Query(value = "update citas u set u.confirmacion = ? where u.id = ?", 

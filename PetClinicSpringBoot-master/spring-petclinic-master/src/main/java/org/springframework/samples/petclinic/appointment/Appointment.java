@@ -23,73 +23,89 @@ public class Appointment extends BaseEntity {
 
     @Column(name = "owner_id")
     @NotEmpty
-    private String owner_id;
+    private Integer owner_id;
+
 
     @Column(name = "fecha")
     @NotEmpty
-    private String fecha;
+    private Date fecha;
+
 
     @Column(name = "hora")
     @NotEmpty
-    private String hora;
+    private Time hora;
+
 
     @Column(name = "mascota")
     @NotEmpty
-    private String mascota;
+    private Integer mascota;
+
 
     @Column(name = "especialidad")
     @NotEmpty
-    private String especialidad;
+    private Integer especialidad;
+
 
     @Column(name = "confirmacion")
     @NotEmpty
-    private String confirmacion;
+    private Integer confirmacion;
+	   
+	
+    public Integer getOwner_id() {
 
-    public String getOwner_id() {
         return owner_id;
     }
+	
+    public void setOwner_id(Integer owner_id) {
 
-    public void setOwner_id(String owner_id) {
         this.owner_id = owner_id;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
+	
+    public void setFecha(Date date) {
 
-    public void setFecha(String date) {
         this.fecha = date;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
+
         this.hora = hora;
     }
 
-    public String getHora() {
+    public Time getHora() {
+
         return hora;
     }
-
-    public String getMascota() {
+	
+    public Integer getMascota() {
+    
         return mascota;
     }
-
-    public void setMascota(String pet) {
+	
+    public void setMascota(Integer pet) {
+   
         this.mascota = pet;
     }
-
-    public String getEspecialidad() {
+	
+    public Integer getEspecialidad() {
+    
         return especialidad;
     }
-
-    public void setEspecialidad(String especialidad) {
+	
+    public void setEspecialidad(Integer especialidad) {
+   
         this.especialidad = especialidad;
     }
-
-    public String getConfirmacion() {
+	
+    public Integer getConfirmacion() {
+   
         return confirmacion;
     }
-
-    public void setConfirmacion(String confirmacion) {
+	
+    public void setConfirmacion(Integer confirmacion){
         this.confirmacion = confirmacion;
     }
 
