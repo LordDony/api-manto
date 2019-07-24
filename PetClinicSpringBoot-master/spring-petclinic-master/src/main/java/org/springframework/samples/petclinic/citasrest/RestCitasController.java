@@ -67,8 +67,8 @@ public class RestCitasController {
         return "Registrado exitosamente";
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value="/api/citas/{cita}")
-    public String deleteStudentRecord(@PathVariable("cita") Integer cita_id) {
+    @RequestMapping(method = RequestMethod.DELETE, value="/api/citas/{cita_id}")
+    public String deleteStudentRecord(@PathVariable("cita_id") Integer cita_id) {
         Appointment cita = this.appointmentRepository.findById(cita_id);
         this.appointmentRepository.delete(cita);
         return "deleted";
