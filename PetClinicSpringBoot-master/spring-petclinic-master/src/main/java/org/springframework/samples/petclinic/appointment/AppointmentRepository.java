@@ -40,9 +40,7 @@ inner join specialties on appointment.id_specialtie=specialties.id;
     nativeQuery = true)
     int updateUserSetStatusForNameNative(String confirmacion, Integer id);
     
-    @Query("SELECT appointment.id,appointment.fecha,appointment.hora,appointment.confirmacion, mascotas.name, mascotas.birth_date from Appointment appointment inner join Mascotas mascotas on appointment.mascota = mascotas.id  WHERE appointment.owner_id = :id")
-    @Transactional
-    Collection<DataCita> getCitasByOwner(@Param("id") Integer id);
+    void save(Appointment appoinment);
     
     void delete(Appointment appoinment);
 }

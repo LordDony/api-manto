@@ -22,6 +22,7 @@ import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.OwnerRepository;
 import org.springframework.samples.petclinic.user.User;
 import org.springframework.samples.petclinic.user.UserRepository;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -52,16 +53,23 @@ public class RestCitasController {
         Appointment cita = this.appointmentRepository.findById(citaID);
         return cita;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
-    public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
-        Collection<DataCita> citas = this.appointmentRepository.getCitasByOwner(ownerID);
-        HashMap<String, Collection<DataCita>> map = new HashMap<>();
-        for(DataCita cita : citas){
-            System.out.println(cita.getBirth_date());
-        }
-        map.put("citas",citas);
-        return map;
+    
+    @RequestMapping(method = RequestMethod.POST, value="/api/citas/new")
+    public String CreateCitas(@RequestBody Appointment cita){
+        
+        System.out.println("Owner_id: "+cita.getOwner_id());
+        System.out.println("Mascota"+cita.getMascota());
+        System.out.println("Confirmacion: "+cita.getConfirmacion());
+        System.out.println("fecha: "+cita.getFecha());
+        System.out.println("Hora"+cita.getHora());
+        this.appointmentRepository.save(cita);
+        
+        return "Registrado exitosamente";
     }
+    /*@RequestMapping(method = RequestMethod.GET, path = "/api/citas/{ownerID}/owners")
+    public Map getCitasByOwner(@PathVariable("ownerID") int ownerID){
+        
+    }*/
     @RequestMapping(method = RequestMethod.GET, path = "/api/citas/confirmadas")
     public Collection<Appointment> getCitasConfirmadas(){
         Collection<Appointment> citasConfirmadas = this.appointmentRepository.getAppointmentsByConfirmation(1);

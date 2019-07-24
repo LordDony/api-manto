@@ -23,73 +23,73 @@ public class Appointment extends BaseEntity {
 
     @Column(name = "owner_id")
     @NotEmpty
-    private Integer owner_id;
+    private String owner_id;
 
     @Column(name = "fecha")
     @NotEmpty
-    private Date fecha;
+    private String fecha;
 
     @Column(name = "hora")
     @NotEmpty
-    private Time hora;
+    private String hora;
 
     @Column(name = "mascota")
     @NotEmpty
-    private Integer mascota;
+    private String mascota;
 
     @Column(name = "especialidad")
     @NotEmpty
-    private Integer especialidad;
+    private String especialidad;
 
     @Column(name = "confirmacion")
     @NotEmpty
-    private Integer confirmacion;
+    private String confirmacion;
 
-    public Integer getOwner_id() {
+    public String getOwner_id() {
         return owner_id;
     }
 
-    public void setOwner_id(Integer owner_id) {
+    public void setOwner_id(String owner_id) {
         this.owner_id = owner_id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date date) {
+    public void setFecha(String date) {
         this.fecha = date;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
-    public Time getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public Integer getMascota() {
+    public String getMascota() {
         return mascota;
     }
 
-    public void setMascota(Integer pet) {
+    public void setMascota(String pet) {
         this.mascota = pet;
     }
 
-    public Integer getEspecialidad() {
+    public String getEspecialidad() {
         return especialidad;
     }
 
-    public void setEspecialidad(Integer especialidad) {
+    public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
 
-    public Integer getConfirmacion() {
+    public String getConfirmacion() {
         return confirmacion;
     }
 
-    public void setConfirmacion(Integer confirmacion) {
+    public void setConfirmacion(String confirmacion) {
         this.confirmacion = confirmacion;
     }
 
